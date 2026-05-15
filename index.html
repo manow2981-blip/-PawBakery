@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawBakery | Premium Pet Bakery & Treats</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-pink: #ff8fab;
+            --dark-pink: #ff5c8a;
+            --sage-green: #8FA998;
+            --cream-bg: rgba(255, 250, 248, 0.94);
+            --text-dark: #2d2d2d;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', 'Quicksand', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            /* พื้นหลังรูปร้านเบเกอรี่มินิมอล (เปลี่ยนรูปจาก Unsplash ที่เสถียร) */
+            background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), 
+                        url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-dark);
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 8%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-pink);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover { color: var(--primary-pink); }
+
+        /* HERO */
+        .hero {
+            height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 50px;
+            border-radius: 40px;
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin: 0 20px;
+        }
+
+        .hero h1 { font-size: 55px; color: var(--primary-pink); margin-bottom: 10px; }
+        .hero p { font-size: 20px; color: #555; }
+
+        /* SECTION */
+        section { padding: 80px 8%; }
+
+        .white-section {
+            background: var(--cream-bg);
+            border-radius: 50px;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow);
+            padding: 60px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 { font-size: 38px; color: var(--text-dark); margin-bottom: 10px; }
+
+        /* BANNER */
+        .main-banner {
+            width: 100%;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+        }
+
+        .banner-text { position: relative; z-index: 2; }
+
+        /* PRODUCT GRID */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 15px;
+            transition: 0.4s;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
+
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            background: #eee;
+        }
+
+        .card h3 { color: var(--primary-pink); font-size: 20px; margin-bottom: 8px; }
+        .card p { font-size: 14px; color: #777; margin-bottom: 15px; line-height: 1.4; }
+
+        .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-pink);
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #f9f9f9;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .card:hover .buy-btn { background: var(--primary-pink); color: white; }
+
+        /* OWNER */
+        .owner-info {
+            text-align: center;
+            background: linear-gradient(135deg, #fff, #fff0f5);
+        }
+
+        /* CONTACT */
+        .contact-info p { margin: 10px 0; font-size: 18px; }
+
+        /* FOOTER */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 8%;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 40px; }
+            section { padding: 40px 5%; }
+            .white-section { padding: 30px; border-radius: 30px; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">PawBakery 🐾</a>
+        <ul>
+            <li><a href="#menu">เมนูสินค้า</a></li>
+            <li><a href="#owner">เจ้าของร้าน</a></li>
+            <li><a href="#contact">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-card">
+            <h1>PawBakery</h1>
+            <p>Homemade & Healthy Treats for Your Best Friends</p>
+            <p style="font-size: 15px; margin-top: 15px; opacity: 0.7; letter-spacing: 1px;">"อร่อยเหมือนคนทาน ปลอดภัยสำหรับสัตว์เลี้ยง"</p>
+        </div>
+    </section>
+
+    <section id="menu" class="white-section">
+        <div class="section-header">
+            <h2>Our Menu Collection</h2>
+            <p>รวมเมนูขนมสุขภาพยอดฮิตที่คัดสรรมาอย่างดี</p>
+        </div>
+
+        <div class="main-banner">
+            <div class="banner-text">
+                <h3 style="font-size: 28px;">The Best Sellers</h3>
+                <p>เมนูยอดนิยมสำหรับน้องหมาและน้องแมว</p>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1591946614421-1fbf121fca6c?auto=format&fit=crop&w=500&q=80" alt="Chicken Cake">
+                <h3>Chicken Treasure Cake</h3>
+                <p>เค้กเนื้อไก่และตับ สูตรโปรตีนสูง ไม่ผสมแป้ง</p>
+                <div class="price">299฿</div>
+                <button class="buy-btn">สั่งซื้อสินค้า</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1604430456280-43f652c4c3af?auto=format&fit=crop&w=500&q=80" alt="Salmon Cake">
+                <h3>Salmon Pinky Heart</h3>
+                <p>เค้กแซลมอนรูปหัวใจ บำรุงขนให้นุ่มเงางาม</p>
+                <div class="price">349฿</div>
+                <button class="buy-btn">สั่งซื้อสินค้า</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1582748153155-3633e730c94d?auto=format&fit=crop&w=500&q=80" alt="Dogaroon">
+                <h3>Dogaroon XL</h3>
+                <p>มาการองตับไก่ไซส์ยักษ์ กรอบนอกนุ่มใน เคี้ยวเพลิน</p>
+                <div class="price">189฿</div>
+                <button class="buy-btn">สั่งซื้อสินค้า</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1583336663277-620dc1996580?auto=format&fit=crop&w=500&q=80" alt="Paw Tart">
+                <h3>Cheesy Paw Tart</h3>
+                <p>ทาร์ตรูปอุ้งเท้าสอดไส้ชีส แคลเซียมสูง มีประโยชน์</p>
+                <div class="price">159฿</div>
+                <button class="buy-btn">สั่งซื้อสินค้า</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=500&q=80" alt="Pumpkin Cookie">
+                <h3>Pumpkin & Oat Cookie</h3>
+                <p>คุกกี้ฟักทองและข้าวโอ๊ต ช่วยระบบขับถ่าย ไฟเบอร์สูง</p>
+                <div class="price">129฿</div>
+                <button class="buy-btn">สั่งซื้อสินค้า</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=500&q=80" alt="Lava Cupcake">
+                <h3>Liver Lava Cupcake</h3>
+                <p>คัพเค้กตับไก่ลาวา สอดไส้ซอสตับเข้มข้น หอมเย้ายวน</p>
+                <div class="price">149฿</div>
+                <button class="buy-btn">สั่งซื้อสินค้า</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="owner" class="white-section owner-info">
+        <div class="section-header">
+            <h2>The Founder</h2>
+        </div>
+        <h3 style="font-size: 32px; color: var(--primary-pink); margin-bottom: 10px;">ขวัญชนก ทองดี</h3>
+        <p style="color: #999; margin-bottom: 25px; font-weight: 500;">Student ID: 6650101061</p>
+        <p style="max-width: 600px; margin: 0 auto; font-style: italic; color: #666; line-height: 1.8;">
+            "สัตว์เลี้ยงคือสมาชิกในครอบครัว PawBakery จึงใส่ใจในทุกขั้นตอนการผลิต <br>
+            เพื่อให้เพื่อนสี่ขาของเราได้รับสิ่งที่ดีและปลอดภัยที่สุด"
+        </p>
+    </section>
+
+    <section id="contact" class="white-section" style="text-align: center;">
+        <div class="section-header">
+            <h2>Contact Us</h2>
+        </div>
+        <div class="contact-info">
+            <p><strong>Facebook:</strong> PawBakery Thailand</p>
+            <p><strong>Instagram:</strong> @pawbakery.official</p>
+            <p><strong>Line:</strong> @pawbakery</p>
+            <p><strong>Email:</strong> contact@pawbakery.com</p>
+        </div>
+    </section>
+
+    <footer>
+        <h2 style="margin-bottom: 10px;">PawBakery 🐾</h2>
+        <p style="font-weight: 300; opacity: 0.8;">Premium Homemade Pet Bakery</p>
+        <div style="margin-top: 25px; font-size: 13px; opacity: 0.5; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            © 2026 PawBakery Project | Created by Kwanchanok Thongdee
+        </div>
+    </footer>
+
+</body>
+</html>
